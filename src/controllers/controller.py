@@ -11,8 +11,8 @@ class Controller():
 
     def retranscript(self, path_audio = "", CHOICE_M = models[5]):
         if path_audio != "":
-            self.retranscript = retranscript.Retranscript(path_audio, CHOICE_M)
             self.view.loading()
+            self.retranscript = retranscript.Retranscript(path_audio, CHOICE_M)
             self.view.stop_loading()
             self.result = self.retranscript.get_result()
             self.view.result(self.result)
