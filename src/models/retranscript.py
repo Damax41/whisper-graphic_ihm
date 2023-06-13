@@ -28,7 +28,7 @@ class Retranscript():
 
     def retranscript(self):
         # decode the audio
-        options = whisper.DecodingOptions()
+        options = whisper.DecodingOptions(fp16=False)
         self.result = whisper.decode(self.model, self.mel, options)
 
     def get_result(self):
