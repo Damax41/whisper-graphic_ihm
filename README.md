@@ -10,7 +10,7 @@ git clone https://github.com/Damax41/whisper-graphic_ihm whisper-graphic_ihm
 
 ```bash
 cd whisper-graphic_ihm
-python 'Whisper (Graphical version).py'
+python "Whisper (Graphical version).py"
 ```
 
 ## Auteurs
