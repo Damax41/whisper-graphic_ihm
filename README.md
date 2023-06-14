@@ -15,4 +15,4 @@ python "Whisper (Graphical version).py"
 
 ## Auteurs
 
-> **Damax41** - *Développeur* - [Damax41](https://github.com/Damax41)
+> **Damax41** - *Développeur* - [Link](https://github.com/Damax41)
