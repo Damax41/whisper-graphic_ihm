@@ -27,7 +27,7 @@ class Retranscript():
         self.result = whisper.decode(self.model, self.mel, options)
 
     def get_result(self):
-        return self.result.text
+        return self.result
 
     def start(self):
         try:
