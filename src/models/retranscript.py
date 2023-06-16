@@ -33,7 +33,8 @@ class Retranscript():
         try:
             self.model = whisper.load_model(self.CHOICE_M)            
             
-            self.result = self.model.transcribe(self.path_audio)
+            options = whisper.DecodingOptions(fp16=False)
+            self.result = self.model.transcribe(self.path_audio, options)
 
             '''
             self.pad_or_trim()
