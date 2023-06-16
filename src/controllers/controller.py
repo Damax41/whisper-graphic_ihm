@@ -12,10 +12,11 @@ class Controller():
 
     def retranscript(self, path_audio, CHOICE_M):
         if path_audio != "" and CHOICE_M in models:
-            self.retranscript = Thread(target=retranscript.Retranscript, args=(path_audio, CHOICE_M))
-            self.retranscript.start()
+            self.retranscript = retranscript.Retranscript(path_audio, CHOICE_M)
+            thread = Thread(target=self.retranscript.start)
+            thread.start()
             self.view.loading()
-            self.retranscript.join()
+            thread.join()
             self.view.stop_loading()
 
             if self.retranscript.success:
