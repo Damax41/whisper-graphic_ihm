@@ -18,12 +18,12 @@ class Controller():
             self.retranscript.join()
             self.view.stop_loading()
 
-            if self.retranscript.exitcode == 0:
-                self.result = self.retranscript.result()
+            if self.retranscript.success:
+                self.result = self.retranscript.get_result()
                 self.view.result(self.result)
             
             else:
-                self.view.error("An error occured during the retranscription")
+                self.view.error(self.retranscript.get_result())
         
         else:
             self.view.error("No audio file selected")

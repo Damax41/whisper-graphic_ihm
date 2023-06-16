@@ -2,15 +2,23 @@ import whisper
 
 class Retranscript():
     def __init__(self, path_audio, CHOICE_M):
-        self.CHOICE_M = CHOICE_M
+        self.success = False
+        self.result = None
 
-        self.model = whisper.load_model(CHOICE_M)
+        try:
+            self.CHOICE_M = CHOICE_M
 
-        self.path_audio = path_audio
+            self.model = whisper.load_model(CHOICE_M)
 
-        self.pad_or_trim()
-        self.log_mel_spectrogram()
-        self.retranscript()
+            self.path_audio = path_audio
+
+            self.pad_or_trim()
+            self.log_mel_spectrogram()
+            self.retranscript()
+            self.succes = True
+        
+        except Exception as e:
+            self.result = str(e)
 
     def pad_or_trim(self):
         # load audio and pad/trim it to fit 30 seconds
