@@ -1,5 +1,6 @@
 from src.models import retranscript, export
 from src.views import view
+from threading import Thread
 
 models = ["tiny.en", "base.en", "small.en", "medium.en", "tiny", "base", "small", "medium", "large"]
 
@@ -9,13 +10,20 @@ class Controller():
         self.view.set_controller(self)
         self.view.main_menu()
 
-    def retranscript(self, path_audio = "", CHOICE_M = models[5]):
-        if path_audio != "":
+    def retranscript(self, path_audio, CHOICE_M):
+        if path_audio != "" and CHOICE_M in models:
+            self.retranscript = Thread(target=retranscript.Retranscript, args=(path_audio, CHOICE_M))
+            self.retranscript.start()
             self.view.loading()
-            self.retranscript = retranscript.Retranscript(path_audio, CHOICE_M)
+            self.retranscript.join()
             self.view.stop_loading()
-            self.result = self.retranscript.get_result()
-            self.view.result(self.result)
+
+            if self.retranscript.exitcode == 0:
+                self.result = self.retranscript.result()
+                self.view.result(self.result)
+            
+            else:
+                self.view.error("An error occured during the retranscription")
         
         else:
             self.view.error("No audio file selected")

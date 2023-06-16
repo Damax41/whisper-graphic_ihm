@@ -27,8 +27,8 @@ class View():
         model_label = ttk.Label(container, text="Choose a model :")
         model_label.grid(column=1, sticky="w")
 
-        model = ttk.Combobox(container, values=["tiny.en", "base.en", "small.en", "medium.en", "tiny", "base", "small", "medium", "large"])
-        model.set("base")
+        model = ttk.Combobox(container, values=["Select a model", "tiny.en", "base.en", "small.en", "medium.en", "tiny", "base", "small", "medium", "large"])
+        model.set("Select a model")
         model.grid(column=1, sticky="e")
 
         button = ttk.Button(self.window, text="Retranscript", command=(lambda: self.controller.retranscript(self.path_audio, model.get())))

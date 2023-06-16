@@ -15,7 +15,7 @@ class Retranscript():
     def pad_or_trim(self):
         # load audio and pad/trim it to fit 30 seconds
         self.audio = whisper.load_audio(self.path_audio)
-        self.audio = whisper.pad_or_trim(self.audio)
+        # self.audio = whisper.pad_or_trim(self.audio)
 
     def log_mel_spectrogram(self):
         # make log-Mel spectrogram and move to the same device as the model
