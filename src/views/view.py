@@ -31,7 +31,7 @@ class View():
         model.set("Select a model")
         model.grid(column=1, sticky="e")
 
-        button = ttk.Button(self.window, text="Retranscript", command=(lambda: self.controller.retranscript(self.path_audio, model.get())))
+        button = ttk.Button(self.window, text="Retranscript", command=(lambda: self.controller.retranscript_load(self.path_audio, model.get())))
         button.grid(row=1, sticky="nsew")
 
     def loading(self):

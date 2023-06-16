@@ -22,7 +22,7 @@ class Controller():
         else:
             self.view.error("No audio file selected or no model selected")
 
-    def loading_finish(self):
+    def retranscript_finish(self):
         self.thread.join()
         self.view.stop_loading()
 

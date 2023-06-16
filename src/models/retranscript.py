@@ -42,7 +42,7 @@ class Retranscript():
             '''
 
             self.success = True
-            self.controller.loading_finish()
+            self.controller.retranscript_finish()
         
         except Exception as e:
             self.result = str(e)
