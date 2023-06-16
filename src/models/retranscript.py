@@ -27,14 +27,13 @@ class Retranscript():
         self.result = whisper.decode(self.model, self.mel, options)
 
     def get_result(self):
-        return self.result
+        return self.result["text"]
 
     def start(self):
         try:
             self.model = whisper.load_model(self.CHOICE_M)            
             
-            options = whisper.DecodingOptions(fp16=False)
-            self.result = self.model.transcribe(self.path_audio, options)
+            self.result = self.model.transcribe(self.path_audio, fp16=False)
 
             '''
             self.pad_or_trim()
@@ -42,7 +41,11 @@ class Retranscript():
             self.retranscript()
             '''
 
-            self.succes = True
+            self.success = True
+            self.controller.loading_finish()
         
         except Exception as e:
             self.result = str(e)
+
+    def set_controller(self, controller):
+        self.controller = controller
