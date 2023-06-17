@@ -46,6 +46,7 @@ class Retranscript():
         
         except Exception as e:
             self.result = str(e)
+            self.controller.retranscript_finish()
 
     def set_controller(self, controller):
         self.controller = controller
