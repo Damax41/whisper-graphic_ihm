@@ -91,7 +91,7 @@ class View():
         self.path["text"] = self.path_audio.split("/")[-1]
     
     def save_file(self):
-        return filedialog.asksaveasfilename(defaultextension=".txt", title="Save file", filetypes=(("Text Files", "*.txt *.md"), ("All Files", "*.*")), initialdir="./ressources")
+        return filedialog.asksaveasfilename(defaultextension=".txt", title="Save file", filetypes=(("Text Files", "*.txt *.md"), ("All Files", "*.*")), initialdir="./export")
 
     def set_controller(self, controller):
         self.controller = controller
