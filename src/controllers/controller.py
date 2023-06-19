@@ -13,14 +13,14 @@ class Controller():
     def retranscript_load(self, path_audio, CHOICE_M):
         if path_audio != "" and CHOICE_M in models:
             try:
+                self.view.loading()
+                
                 self.retranscript = retranscript.Retranscript(path_audio, CHOICE_M)
                 self.retranscript.set_controller(self)
 
                 self.monitor = Monitor(self.retranscript.get_thread(), self.retranscript_finish)
                 self.monitor_thread = self.monitor.get_thread()
                 self.monitor_thread.start()
-
-                self.view.loading()
             
             except Exception as e:
                 self.view.error(e)
