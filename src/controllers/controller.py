@@ -1,5 +1,6 @@
-from src.models import retranscript, export
-from src.views import view
+from models import retranscript, export
+from views import view
+from controllers.thread_monitor import Monitor
 from threading import Thread
 
 models = ["tiny.en", "base.en", "small.en", "medium.en", "tiny", "base", "small", "medium", "large", "large-v1", "large-v2"]
@@ -12,18 +13,23 @@ class Controller():
 
     def retranscript_load(self, path_audio, CHOICE_M):
         if path_audio != "" and CHOICE_M in models:
-            self.retranscript = retranscript.Retranscript(path_audio, CHOICE_M)
-            self.retranscript.set_controller(self)
+            try:
+                self.retranscript = retranscript.Retranscript(path_audio, CHOICE_M)
+                self.retranscript.set_controller(self)
 
-            self.thread = Thread(target=self.retranscript.start)
-            self.thread.start()
-            self.view.loading()
+                self.monitor = Monitor(self.retranscript.get_thread(), self.retranscript_finish)
+                self.monitor_thread = self.monitor.get_thread()
+                self.monitor_thread.start()
+
+                self.view.loading()
+            
+            except Exception as e:
+                self.view.error(e)
         
         else:
             self.view.error("No audio file selected or no model selected")
 
     def retranscript_finish(self):
-        self.thread.join()
         self.view.stop_loading()
 
         if self.retranscript.success:
@@ -34,7 +40,7 @@ class Controller():
             self.view.error(self.retranscript.get_result())
 
     def loading_return(self):
-        self.thread._stop()
+        self.monitor_thread = None
         self.retranscript = None
         self.view.stop_loading()
         self.view.main_menu()
