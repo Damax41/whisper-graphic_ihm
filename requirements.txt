@@ -1,2 +1,2 @@
 tkinter==8.6
-whisper
+openai-whisper==20230314
