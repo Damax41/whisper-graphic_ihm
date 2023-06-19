@@ -1,6 +1,6 @@
-from models import retranscript, export
-from views import view
-from controllers.thread_monitor import Monitor
+from src.models import retranscript, export
+from src.views import view
+from src.controllers.thread_monitor import Monitor
 from threading import Thread
 
 models = ["tiny.en", "base.en", "small.en", "medium.en", "tiny", "base", "small", "medium", "large", "large-v1", "large-v2"]
