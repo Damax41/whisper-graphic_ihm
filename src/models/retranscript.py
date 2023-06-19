@@ -3,6 +3,7 @@ from threading import Thread
 
 class Retranscript():
     def __init__(self, path_audio, CHOICE_M):
+        self.success = False
         self.result = None
         self.thread = None
         self.CHOICE_M = CHOICE_M
@@ -41,6 +42,8 @@ class Retranscript():
             self.pad_or_trim()
             self.log_mel_spectrogram()
             self.decode()
+
+            self.success = True
         
         except Exception as e:
             self.result = str(e)
@@ -49,6 +52,8 @@ class Retranscript():
         try:
             self.result = self.model.transcribe(self.path_audio, fp16=False)
             self.result = self.result["text"]
+
+            self.success = True
         
         except Exception as e:
             self.result = str(e)
