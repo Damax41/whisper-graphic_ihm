@@ -58,7 +58,8 @@ This will open the Whisper Transcription App GUI. From here, you can:
 
 ## Version History
 
-- v1.1.0 (current)
+-v1.1.1 (current)
+- v1.1.0
 - v1.0.2(initial release)
 
 ## Support
