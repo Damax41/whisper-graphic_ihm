@@ -27,7 +27,7 @@ class View():
         model_label = ttk.Label(container, text="Choose a model :")
         model_label.grid(column=1, sticky="w")
 
-        model = ttk.Combobox(container, values=["Select a model", "tiny.en", "base.en", "small.en", "medium.en", "tiny", "base", "small", "medium", "large", "large-v1", "large-v2"])
+        model = ttk.Combobox(container, values=["Select a model", "tiny.en", "base.en", "small.en", "medium.en", "tiny", "base", "small", "medium", "large", "large-v1", "large-v2", "large-v3"])
         model.set("Select a model")
         model.grid(column=1, sticky="e")
 

@@ -2,7 +2,7 @@ from src.models import retranscript, export
 from src.views import view
 from src.controllers.thread_monitor import Monitor
 
-models = ["tiny.en", "base.en", "small.en", "medium.en", "tiny", "base", "small", "medium", "large", "large-v1", "large-v2"]
+models = ["tiny.en", "base.en", "small.en", "medium.en", "tiny", "base", "small", "medium", "large", "large-v1", "large-v2", "large-v3"]
 
 class Controller():
     def __init__(self):

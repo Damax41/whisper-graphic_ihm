@@ -10,10 +10,9 @@ class Retranscript():
         self.path_audio = path_audio
 
         try:
-            self.model = whisper.load_model(self.CHOICE_M)
-            self.thread = Thread(target=self.transcribe)
+            # self.thread = Thread(target=self.transcribe)
 
-            # self.thread = Thread(target=self.retranscript)
+            self.thread = Thread(target=self.retranscript)
         
         except Exception as e:
             self.result = str(e)
@@ -25,23 +24,31 @@ class Retranscript():
 
     def log_mel_spectrogram(self):
         # make log-Mel spectrogram and move to the same device as the model
-        self.mel = whisper.log_mel_spectrogram(self.audio).to(self.model.device)
+        self.mel = whisper.log_mel_spectrogram(self.audio).to(self.model_detect.device)
 
     def detect_language(self):
         # detect the spoken language
-        _, probs = self.model.detect_language(self.mel)
-        return max(probs, key=probs.get)
+        _, probs = self.model_detect.detect_language(self.mel)
+        self.language = max(probs, key=probs.get)
 
-    def decode(self):
+    #def decode(self):
         # decode the audio
-        options = whisper.DecodingOptions(fp16=False)
-        self.result = whisper.decode(self.model, self.mel, options)
+    #    options = whisper.DecodingOptions(fp16=True)
+    #    self.result = whisper.decode(self.model, self.mel, options)
 
     def retranscript(self):
         try:
+            self.model_detect = whisper.load_model(name="base")
+
             self.pad_or_trim()
             self.log_mel_spectrogram()
-            self.decode()
+            self.detect_language()
+
+            model = whisper.load_model(name=self.CHOICE_M)
+            options = whisper.DecodingOptions(fp16=True, language=self.language)
+
+            self.result = model.transcribe(self.path_audio)
+            self.result = self.result["text"]
 
             self.success = True
         
@@ -50,7 +57,9 @@ class Retranscript():
 
     def transcribe(self):
         try:
-            self.result = self.model.transcribe(self.path_audio, fp16=False)
+            model = whisper.load_model(name=self.CHOICE_M)
+
+            self.result = model.transcribe(self.path_audio, fp16=False)
             self.result = self.result["text"]
 
             self.success = True
